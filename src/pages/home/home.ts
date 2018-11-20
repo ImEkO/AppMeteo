@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController, ToastController } from 'ionic-angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import * as HighCharts from 'highcharts';
 
 @Component({
   selector: 'page-home',
@@ -22,9 +23,13 @@ export class HomePage {
 
   getImage() {
   const options: CameraOptions = {
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    destinationType: this.camera.DestinationType.FILE_URI,      
     quality: 100,
-    destinationType: this.camera.DestinationType.FILE_URI,
-    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+    targetWidth: 1000,
+    targetHeight: 1000,
+    encodingType: this.camera.EncodingType.JPEG,
+    correctOrientation: true
   }
 
   this.camera.getPicture(options).then((imageData) => {
